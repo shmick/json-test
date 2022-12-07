@@ -17,15 +17,16 @@ jobs:
       - name: Get the list of changed files
         id: changed-files
         uses: tj-actions/changed-files@v34
+        with:
+          files: |
+            **/*.json
 
       - name: Generate minified version of new and changed json files
+        if: steps.changed-files-specific.outputs.only_changed == 'true'
         run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            if [[ $file == *.json ]]
-              then
-              echo "Validating and creating minified version of ${file} as ${file}.mini"
-              jq -c . ${file} > ${file}.mini
-            fi
+          for file in ${{ steps.changed-files-specific.outputs.all_changed_files }}; do
+            echo "Validating and creating minified version of ${file} as ${file}.mini"
+            jq -c . ${file} > ${file}.mini
           done
           
       - name: auto commit auto generated json.mini files    
