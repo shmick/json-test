@@ -12,8 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: ${{ github.head_ref }} # needed for git-auto-commit-action
-
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+          
       - name: Get the list of changed files
         id: changed-files
         uses: tj-actions/changed-files@v34
