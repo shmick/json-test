@@ -21,12 +21,14 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v34
 
-      - name: List all changed files
+      - name: Minify new or changed json files
         run: |
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "$file was changed"
-            echo "Creating minified version of ${file}"
-            jq -c . ${file} > ${file}.mini
+            if [[ $file == *.json ]]
+              then
+              echo "Creating minified version of ${file}"
+              jq -c . ${file} > ${file}.mini
+            fi
           done
           
       - uses: stefanzweifel/git-auto-commit-action@v4
