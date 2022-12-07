@@ -7,11 +7,6 @@ on:
       - '!main'
     paths:
       - "**/*.json"
-  pull_request:
-    branches:
-      - 'main'
-    paths:
-      - "**/*.json"
       
 jobs:
   build:
