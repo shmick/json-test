@@ -28,8 +28,8 @@ jobs:
             fi
           done
           
-      # This takes care of auto commiting the auto generated json.mini files    
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - name: auto commit auto generated json.mini files    
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
           file_pattern: '*.json.mini'
           commit_message: Auto commit minified json files
