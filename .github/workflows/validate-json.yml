@@ -2,10 +2,11 @@ name: Validate and Minify JSON
 
 on:
   pull_request:
-    types: [opened, reopened]
     paths:
       - "**/*.json"
   push:
+    branches:
+      - main
     paths:
       - "**/*.json"
       
