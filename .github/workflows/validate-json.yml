@@ -23,7 +23,7 @@ jobs:
             **/*.json
 
       - name: Generate minified version of new and changed json files
-        if: steps.changed-files-specific.outputs.only_changed == 'true'
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
         run: |
           for file in ${{ steps.changed-files-specific.outputs.all_changed_files }}; do
             echo "Validating and creating minified version of ${file} as ${file}.mini"
