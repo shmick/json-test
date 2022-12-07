@@ -11,7 +11,7 @@ on:
       - "**/*.json"
       
 jobs:
-  build:
+  validate_and_minify:
     runs-on: ubuntu-latest
     name: Minify new or changed json files
     steps:
