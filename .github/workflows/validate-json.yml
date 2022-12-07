@@ -2,12 +2,17 @@ name: Validate and Minify JSON
 
 on:
   push:
+    branches:
+      - '*'
+      - '!main'
     paths:
       - "**/*.json"
   pull_request:
+    branches:
+      - 'main'
     paths:
       - "**/*.json"
-
+      
 jobs:
   build:
     runs-on: ubuntu-latest
