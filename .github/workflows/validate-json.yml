@@ -19,6 +19,7 @@ jobs:
         uses: tj-actions/changed-files@v34
         with:
           files: |
+            *.json
             **/*.json
 
       - name: Generate minified version of new and changed json files
