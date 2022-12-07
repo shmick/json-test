@@ -17,8 +17,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # OR "2" -> To retrieve the preceding commit.
-
+          fetch-depth: 0
+          
       - name: Get the list of changed files
         id: changed-files
         uses: tj-actions/changed-files@v34
@@ -33,6 +33,7 @@ jobs:
             fi
           done
           
+      # This takes care of auto commiting the auto generated json.mini files    
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           file_pattern: '*.json.mini'
