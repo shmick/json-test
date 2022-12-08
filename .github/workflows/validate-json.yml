@@ -50,5 +50,5 @@ jobs:
       - name: auto commit auto generated json.mini files
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Auto commit minified json files
+          commit_message: Auto commit changes
           
