@@ -21,7 +21,7 @@ jobs:
           files: |
             **/*.json
             
-      - name: Validate each changed json file
+      - name: Validate each file
         if: steps.changed-files.outputs.any_changed == 'true'
         run: |
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
@@ -29,7 +29,7 @@ jobs:
             jq . ${file} > /dev/null
           done
 
-      - name: Generate minified version of new and changed json files
+      - name: Generate minified files
         run: |
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "Creating minified version of ${file} as ${file}.mini"
