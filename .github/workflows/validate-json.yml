@@ -33,6 +33,5 @@ jobs:
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          file_pattern: '*.json.mini'
           commit_message: Auto commit minified json files
           
