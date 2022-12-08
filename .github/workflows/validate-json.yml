@@ -24,14 +24,14 @@ jobs:
       - name: Validate each file
         if: steps.changed-files.outputs.any_changed == 'true'
         run: |
-          for file in ${{ steps.changed-files.outputs.all_modified_files }}; do
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "Validating ${file}"
             jq . ${file} > /dev/null
           done
 
       - name: Generate minified files
         run: |
-          for file in ${{ steps.changed-files.outputs.all_modified_files }}; do
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "Creating minified version of ${file} as ${file}.mini"
             jq -r tostring ${file} > ${file}.mini
           done
