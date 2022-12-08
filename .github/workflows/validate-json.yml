@@ -30,7 +30,8 @@ jobs:
             jq -c . ${file} > ${file}.mini
           done
           
-      - name: auto commit auto generated json.mini files    
+      - name: auto commit auto generated json.mini files
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           file_pattern: '*.json.mini'
