@@ -12,14 +12,14 @@
 	"countryCode": "TD",
 	"email uses current data": "Jere.Presber@gmail.com",
 	"email from expression": "Jere.Presber@yopmail.com",
-	"array": 
+	"array": [
 		"Shannah",
 		"Caressa",
 		"Tierney",
 		"Myrtice",
 		"Emelina"
 	],
-	"array of objects": 
+	"array of objects": [
 		{
 			"index": "0",
 			"index start at 5": "5"
