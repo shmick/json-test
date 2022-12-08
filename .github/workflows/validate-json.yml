@@ -21,16 +21,24 @@ jobs:
           files: |
             **/*.json
             
-      - name: Generate minified version of new and changed json files
+      - name: Validate each changed json file
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         run: |
           for file in ${{ steps.changed-files-specific.outputs.all_changed_files }}; do
-            echo "Validating and creating minified version of ${file} as ${file}.mini"
-            jq . ${file} > /dev/null && jq -r tostring ${file} > ${file}.mini
+            echo "Validating ${file}"
+            jq . ${file} > /dev/null
           done
-          
+
+      - name: Generate minified version of new and changed json files
+        if: ${{ success() }}
+        run: |
+          for file in ${{ steps.changed-files-specific.outputs.all_changed_files }}; do
+            echo "Creating minified version of ${file} as ${file}.mini"
+            jq -r tostring ${file} > ${file}.mini
+          done
+
       - name: auto commit auto generated json.mini files
-        if: steps.changed-files-specific.outputs.any_changed == 'true'
+        if: ${{ success() }}
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Auto commit minified json files
