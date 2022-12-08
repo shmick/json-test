@@ -15,11 +15,12 @@ jobs:
           fetch-depth: 0
           
       - name: Get the list of changed files
-        id: changed-files
+        id: changed-files-specific
         uses: tj-actions/changed-files@v34
         with:
           files: |
-            **/*
+            *.json
+            **/*.json
 
       - name: Generate minified version of new and changed json files
         if: steps.changed-files-specific.outputs.any_changed == 'true'
