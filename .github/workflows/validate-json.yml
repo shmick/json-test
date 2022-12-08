@@ -24,16 +24,27 @@ jobs:
       - name: Validate each file
         if: steps.changed-files.outputs.any_changed == 'true'
         run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          for file in ${{ steps.changed-files.outputs.all_modified_files }}; do
             echo "Validating ${file}"
             jq . ${file} > /dev/null
           done
 
       - name: Generate minified files
         run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          for file in ${{ steps.changed-files.outputs.all_modified_files }}; do
             echo "Creating minified version of ${file} as ${file}.mini"
             jq -r tostring ${file} > ${file}.mini
+          done
+
+      - name: Delete minified files if main json file is deleted
+        if: steps.changed-files.outputs.any_deleted == 'true'
+        run: |
+          for file in ${{ steps.changed-files.outputs.deleted_files }}; do
+            echo "Deleting ${file}.mini"
+            if [ -e ${file}.mini ]
+            then
+            rm ${file}.mini
+            fi
           done
 
       - name: auto commit auto generated json.mini files
