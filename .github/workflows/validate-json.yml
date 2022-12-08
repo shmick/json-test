@@ -36,7 +36,7 @@ jobs:
             jq -r tostring ${file} > ${file}.mini
           done
 
-      - name: Delete minified files if main json file is deleted
+      - name: Delete .json.mini files if parent .json file is deleted
         if: steps.changed-files.outputs.any_deleted == 'true'
         run: |
           for file in ${{ steps.changed-files.outputs.deleted_files }}; do
