@@ -26,7 +26,7 @@ jobs:
         run: |
           for file in ${{ steps.changed-files-specific.outputs.all_changed_files }}; do
             echo "Validating and creating minified version of ${file} as ${file}.mini"
-            jq -r tostring ${file} > ${file}.mini
+            jq . ${file} > /dev/null && jq -r tostring ${file} > ${file}.mini
           done
           
       - name: auto commit auto generated json.mini files
