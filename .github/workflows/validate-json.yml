@@ -20,7 +20,7 @@ jobs:
         with:
           files: |
             **/*.json
-            
+                  
       - name: Validate each file
         if: steps.changed-files.outputs.any_changed == 'true'
         run: |
