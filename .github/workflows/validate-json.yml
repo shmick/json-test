@@ -30,7 +30,6 @@ jobs:
           done
 
       - name: Generate minified version of new and changed json files
-        if: ${{ success() }}
         run: |
           for file in ${{ steps.changed-files-specific.outputs.all_changed_files }}; do
             echo "Creating minified version of ${file} as ${file}.mini"
@@ -38,7 +37,7 @@ jobs:
           done
 
       - name: auto commit auto generated json.mini files
-        if: ${{ success() }}
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Auto commit minified json files
