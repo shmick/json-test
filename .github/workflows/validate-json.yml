@@ -20,7 +20,6 @@ jobs:
         with:
           files: |
             *.json
-            **/*.json
 
       - name: Generate minified version of new and changed json files
         if: steps.changed-files-specific.outputs.any_changed == 'true'
